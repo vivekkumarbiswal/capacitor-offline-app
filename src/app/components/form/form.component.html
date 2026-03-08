@@ -1,0 +1,29 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>User Form</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+      <label>Name: </label>
+      <input type="text" formControlName="name" />
+
+      <br /><br />
+
+      <label>Email: </label>
+      <input type="text" formControlName="email" />
+
+      <br /><br />
+
+      <button type="submit">Submit</button>
+    </form>
+    <br /><br />
+    <hr />
+    <br /><br />
+    <ul>
+      <li *ngFor="let user of users">{{ user.name }} - {{ user.email }}</li>
+    </ul>
+  </ion-content>
+</div>
