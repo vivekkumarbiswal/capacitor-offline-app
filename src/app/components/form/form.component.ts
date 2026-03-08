@@ -25,18 +25,19 @@ export class FormComponent implements OnInit {
     });
     this.loadUsers();
 
-    window.addEventListener('online', () => {
-      console.log('Internet back -> syncing');
-      this.syncService.syncOfflineUsers().subscribe(() => {
-        this.loadUsers();
-      });
-    });
+    // window.addEventListener('online', () => {
+    //   console.log('Internet back -> syncing');
+    //   this.syncService.syncOfflineUsers().subscribe(() => {
+    //     this.loadUsers();
+    //   });
+    // });
   }
 
   submitForm() {
     console.log('Submit Clicked');
     const user = this.userForm.value;
     this.syncService.submitUser(user).subscribe(() => {
+      console.log('SYNC EVENT RECEIVED IN FORM COMPONENT');
       this.loadUsers();
     });
     this.userForm.reset();
