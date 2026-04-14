@@ -1,29 +1,68 @@
-<div class="ion-page">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>User Form</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<div class="main-container">
+  <div class="form-card">
+    <div class="card-header">
+      <h2>Add New Participant</h2>
+      <p class="subtitle">Enter details to sync with the server</p>
+    </div>
 
-  <ion-content>
     <form [formGroup]="userForm" (ngSubmit)="submitForm()">
-      <label>Name: </label>
-      <input type="text" formControlName="name" />
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <div class="input-wrapper">
+          <ion-icon name="person-outline"></ion-icon>
+          <input id="name" type="text" formControlName="name" placeholder="John Doe">
+        </div>
+        <div class="error" *ngIf="userForm.get('name')?.touched && userForm.get('name')?.invalid">
+          Please enter a valid name
+        </div>
+      </div>
 
-      <br /><br />
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input id="email" type="email" formControlName="email" placeholder="john@example.com">
+        </div>
+        <div class="error" *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid">
+          Please enter a valid email
+        </div>
+      </div>
 
-      <label>Email: </label>
-      <input type="text" formControlName="email" />
-
-      <br /><br />
-
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="userForm.invalid" [class.submitting]="isLoading">
+        <span>{{ (isOnline$ | async) ? 'Submit Now' : 'Save Offline' }}</span>
+        <ion-icon [name]="(isOnline$ | async) ? 'cloud-upload-outline' : 'save-outline'"></ion-icon>
+      </button>
     </form>
-    <br /><br />
-    <hr />
-    <br /><br />
-    <ul>
-      <li *ngFor="let user of users">{{ user.name }} - {{ user.email }}</li>
-    </ul>
-  </ion-content>
+  </div>
+
+  <div class="list-section">
+    <div class="list-header">
+      <h3>Active Records</h3>
+      <span class="count">{{ users.length }} entries</span>
+    </div>
+
+    <div class="loader-container" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && users.length === 0">
+      <ion-icon name="documents-outline"></ion-icon>
+      <p>No records found on server.</p>
+    </div>
+
+    <div class="user-grid" *ngIf="!isLoading">
+      <div class="user-card" *ngFor="let user of users">
+        <div class="avatar">
+          {{ user.name.charAt(0) }}
+        </div>
+        <div class="details">
+          <h4>{{ user.name }}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+        <div class="status-indicator synced">
+          <ion-icon name="checkmark-done-circle"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

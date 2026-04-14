@@ -1,0 +1,43 @@
+.network-badge {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  &.online {
+    background: rgba(232, 255, 232, 0.9);
+    color: #2e7d32;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+    .status-dot {
+      background-color: #4caf50;
+      box-shadow: 0 0 8px #4caf50;
+    }
+  }
+
+  &.offline {
+    background: rgba(255, 235, 235, 0.9);
+    color: #d32f2f;
+    border: 1px solid rgba(211, 47, 47, 0.2);
+    .status-dot {
+      background-color: #f44336;
+      box-shadow: 0 0 8px #f44336;
+    }
+  }
+}

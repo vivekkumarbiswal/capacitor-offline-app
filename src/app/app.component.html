@@ -1,3 +1,11 @@
 <ion-app>
-  <app-form></app-form>
+  <!-- Modern Status Indicator -->
+  <div class="network-badge" [class.online]="isOnline$ | async" [class.offline]="!(isOnline$ | async)">
+    <div class="status-dot"></div>
+    <span>{{ (isOnline$ | async) ? 'Online' : 'Offline' }}</span>
+  </div>
+
+  <ion-content>
+    <app-form></app-form>
+  </ion-content>
 </ion-app>

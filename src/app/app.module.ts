@@ -11,11 +11,19 @@ import { IonicModule } from '@ionic/angular';
 
 const dbConfig: DBConfig = {
   name: 'OFFLINEDB',
-  version: 1,
+  version: 2,
   objectStoresMeta: [
     {
       store: 'offlineUsers',
       storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        { name: 'name', keypath: 'name', options: { unique: false } },
+        { name: 'email', keypath: 'email', options: { unique: false } },
+      ],
+    },
+    {
+      store: 'cachedUsers',
+      storeConfig: { keyPath: 'id', autoIncrement: false },
       storeSchema: [
         { name: 'name', keypath: 'name', options: { unique: false } },
         { name: 'email', keypath: 'email', options: { unique: false } },

@@ -12,7 +12,7 @@ export class ApiService {
     const platform = Capacitor.getPlatform();
 
     if (platform === 'android') {
-      return 'http://192.168.0.16:3000/users';
+      return 'http://192.168.0.14:3000/users';
     }
 
     if (platform === 'ios') {
